@@ -29,4 +29,10 @@ public class ItemStack {
         count -= amount;
         return true;
     }
+
+    public boolean hasSameItem(ItemStack otherStack) {
+        if (otherStack.getItem().equals(item))
+            return true;
+        return false;
+    }
 }

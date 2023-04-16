@@ -15,6 +15,7 @@ public final class Player {
     private double mana; // ! might become stamina
     private double experiencePoints;
     private int gold;
+
     // private PlayerTypeEnum playerType;
     private EnumMap<PlayerInventoryEnum, HashMap<Integer, ItemStack>> inventory = new EnumMap<>(
             PlayerInventoryEnum.class);
@@ -24,7 +25,6 @@ public final class Player {
     public Player() {
         for (PlayerInventoryEnum e : PlayerInventoryEnum.values())
             inventory.put(e, new HashMap<>());
-
     }
 
 }
