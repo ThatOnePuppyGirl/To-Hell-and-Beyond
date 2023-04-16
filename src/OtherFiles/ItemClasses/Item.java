@@ -46,4 +46,14 @@ public abstract class Item {
     public boolean getStackability() {
         return isStackable;
     }
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Item))
+            return false;
+        if (obj == this)
+            return true;
+        if (((Item) obj).id == this.id)
+            return true;
+        return false;
+    }
 }

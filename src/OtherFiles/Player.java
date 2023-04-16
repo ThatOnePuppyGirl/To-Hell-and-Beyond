@@ -1,28 +1,30 @@
 package OtherFiles;
 
-import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 
 import OtherFiles.ItemClasses.ItemStack;
 
 public final class Player {
+    private enum PlayerInventoryEnum {
+        ARMOR, BUFFS, INVSTACK, INVNOSTACK
+    }
+
     private int level;
     private double health;
     private double mana; // ! might become stamina
     private double experiencePoints;
+    private int gold;
     // private PlayerTypeEnum playerType;
-    private HashMap<String, HashMap<Integer, ItemStack>> inventory = new HashMap<>();
-    // private Weapon currentWeapon;
-    /*
-     * "Armor" - armor
-     * "Buffs" - permanent buff items
-     * "InventoryStackable" - general inventory
-     * "InventoryNonStackable" - non stackable inventory
-     * 
-     * 
-     */
+    private EnumMap<PlayerInventoryEnum, HashMap<Integer, ItemStack>> inventory = new EnumMap<>(
+            PlayerInventoryEnum.class);
 
-    public Player(String[] args, int[] argsInt, boolean[] argsBool) {
+    // private Weapon currentWeapon;
+
+    public Player() {
+        for (PlayerInventoryEnum e : PlayerInventoryEnum.values())
+            inventory.put(e, new HashMap<>());
+
     }
 
 }
