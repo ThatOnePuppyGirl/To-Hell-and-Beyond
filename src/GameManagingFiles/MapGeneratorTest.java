@@ -15,7 +15,7 @@ public class MapGeneratorTest {
     @Test
     public void TestMapGeneratorMultiple() {
         int count = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             System.out.println(i);
             MapGenerator map = new MapGenerator(10, 10);
             if (map.IsMapInvalid())

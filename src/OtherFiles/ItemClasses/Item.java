@@ -1,4 +1,4 @@
-package OtherFiles;
+package OtherFiles.ItemClasses;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,8 +11,11 @@ public abstract class Item {
     private final int levelNeeded;
     private final String name;
     private final int id;
+    private final boolean isStackable;
 
-    public Item(String itemName, int itemID, int level, ItemRarityEnum inputRarity, ItemTypeEnum... typesArray) {
+    public Item(boolean canStack, String itemName, int itemID, int level, ItemRarityEnum inputRarity,
+            ItemTypeEnum... typesArray) {
+        isStackable = canStack;
         name = itemName;
         id = itemID;
         levelNeeded = level;
@@ -38,5 +41,9 @@ public abstract class Item {
 
     public int getID() {
         return id;
+    }
+
+    public boolean getStackability() {
+        return isStackable;
     }
 }
