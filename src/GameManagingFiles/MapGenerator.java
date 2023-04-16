@@ -1,11 +1,13 @@
 package GameManagingFiles;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList; // necessary
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.ArrayDeque;
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
 
 public final class MapGenerator {
 	private final class Coords {
