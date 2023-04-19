@@ -192,8 +192,6 @@ public final class MapGenerator {
 			this.isCollapsed = this.IsCollapsed();
 		}
 
-		FixMap();
-
 		// for visualization for now
 		String[][] pretty = Prettify(this.map);
 		Integer[][] newMap = new Integer[map.length][map[0].length];
@@ -217,24 +215,80 @@ public final class MapGenerator {
 		frame.setVisible(true);
 	}
 
-	private void FixMap() {
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[0].length; j++) {
-				int index = map[i][j];
-				if (!(i == height - 1)) {
-					if (((index & 4) != 0) && ((map[i + 1][j] & 1) == 0))
-						map[i + 1][j] += 1;
-					else if (((index & 4) == 0) && ((map[i + 1][j] & 1) != 0))
-						map[i][j] += 4;
-				}
-				if (!(j == width - 1)) {
-					if (((index & 2) != 0) && ((map[i][j + 1] & 8) == 0))
-						map[i][j + 1] += 8;
-					else if (((index & 2) == 0) && ((map[i][j + 1] & 8) != 0))
-						map[i][j] += 2;
+	public int[] FindLongestConnections() {
+		int[] data = new int[3];
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+
+				int length = FindLongestPathFromNode(col, row);
+				if (length > data[0]) {
+					data[0] = length;
+					data[1] = col;
+					data[2] = row;
 				}
 			}
 		}
+
+		return data;
+	}
+
+	private int FindLongestPathFromNode(int x, int y) {
+		boolean[][] beenVisited = new boolean[height][width];
+		int count = 0;
+		ArrayList<Coords> queue = new ArrayList<>();
+		queue.add(new Coords(x, y));
+		while (!(queue.isEmpty())) {
+			Coords coords = queue.remove(0);
+			System.out.println(count);
+			int[] neighbors = GetNeighborDirections(coords);
+			y = coords.y;
+			x = coords.x;
+			int roomNum = map[y][x];
+			beenVisited[y][x] = true;
+			for (int i : neighbors) {
+				switch (i) {
+					case 0:
+						if (!(((roomNum & 1) == 0) || (beenVisited[y - 1][x]))) {
+							count++;
+							beenVisited[y - 1][x] = true;
+							queue.add(new Coords(x, y - 1));
+						}
+						break;
+					case 1:
+						if (!(((roomNum & 2) == 0) || (beenVisited[y][x + 1]))) {
+							count++;
+							beenVisited[y][x + 1] = true;
+							queue.add(new Coords(x + 1, y));
+						}
+						break;
+					case 2:
+						if (!(((roomNum & 4) == 0) || (beenVisited[y + 1][x]))) {
+							count++;
+							beenVisited[y + 1][x] = true;
+							queue.add(new Coords(x, y + 1));
+						}
+						break;
+					case 3:
+						if (!(((roomNum & 8) == 0) || (beenVisited[y][x - 1]))) {
+							count++;
+							beenVisited[y][x - 1] = true;
+							queue.add(new Coords(x - 1, y));
+						}
+						break;
+				}
+
+			}
+		}
+		return count;
+	}
+
+	private int[] GetNeighborDirections(Coords coords) {
+		int neighbors = 4;
+		if (coords.isBottom || coords.isTop)
+			neighbors--;
+		if (coords.isLeft || coords.isRight)
+			neighbors--;
+		return GetNeighborDirections(coords, neighbors);
 	}
 
 	public boolean IsMapInvalid() {
@@ -468,7 +522,7 @@ public final class MapGenerator {
 			} else if (pCoords.isBottom && pCoords.isRight) {
 				neighborDir = new int[] { 0, 3 };
 			} else if (pCoords.isBottom && pCoords.isLeft) {
-				neighborDir = new int[] { 0, 2 };
+				neighborDir = new int[] { 0, 1 };
 			}
 		}
 		return neighborDir;
