@@ -192,6 +192,8 @@ public final class MapGenerator {
 			this.isCollapsed = this.IsCollapsed();
 		}
 
+		GetRidOfDeadEnds();
+
 		// for visualization for now
 		String[][] pretty = Prettify(this.map);
 		Integer[][] newMap = new Integer[map.length][map[0].length];
@@ -215,30 +217,39 @@ public final class MapGenerator {
 		frame.setVisible(true);
 	}
 
-	public int[] FindLongestConnections() {
-		int[] data = new int[3];
-		for (int row = 0; row < height; row++) {
-			for (int col = 0; col < width; col++) {
+	private void GetRidOfDeadEnds() {
+		int[][] biggest = FindLongestConnections();
+		int max = 0;
+		for (int i = 0; i < biggest.length; i++)
+			for (int j = 0; j < biggest[0].length; j++)
+				if (biggest[i][j] > max)
+					max = biggest[i][j];
 
-				int length = FindLongestPathFromNode(col, row);
-				if (length > data[0]) {
-					data[0] = length;
-					data[1] = col;
-					data[2] = row;
-				}
-			}
-		}
-
-		return data;
+		for (int i = 0; i < biggest.length; i++)
+			for (int j = 0; j < biggest[0].length; j++)
+				if (biggest[i][j] != max)
+					map[i][j] = 0;
 	}
 
-	private int FindLongestPathFromNode(int x, int y) {
+	private int[][] FindLongestConnections() {
+		int[][] biggest = new int[height][width];
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				FindLongestPathFromNode(col, row, biggest);
+			}
+		}
+		return biggest;
+	}
+
+	private void FindLongestPathFromNode(int x, int y, int[][] biggestMap) {
 		boolean[][] beenVisited = new boolean[height][width];
 		int count = 0;
 		ArrayList<Coords> queue = new ArrayList<>();
+		ArrayList<Coords> setInCluster = new ArrayList<>();
 		queue.add(new Coords(x, y));
 		while (!(queue.isEmpty())) {
 			Coords coords = queue.remove(0);
+			setInCluster.add(coords);
 			System.out.println(count);
 			int[] neighbors = GetNeighborDirections(coords);
 			y = coords.y;
@@ -276,10 +287,11 @@ public final class MapGenerator {
 						}
 						break;
 				}
-
 			}
 		}
-		return count;
+		for (Coords coords : setInCluster) {
+			biggestMap[coords.y][coords.x] = count;
+		}
 	}
 
 	private int[] GetNeighborDirections(Coords coords) {
