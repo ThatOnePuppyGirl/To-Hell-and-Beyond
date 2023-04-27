@@ -13,6 +13,10 @@ public class ItemStack {
         return item;
     }
 
+    public int getID() {
+        return item.getID();
+    }
+
     public int getCount() {
         return count;
     }
@@ -32,6 +36,12 @@ public class ItemStack {
 
     public boolean hasSameItem(ItemStack otherStack) {
         if (otherStack.getItem().equals(item))
+            return true;
+        return false;
+    }
+
+    public boolean isSameStack(ItemStack otherStack) {
+        if (hasSameItem(otherStack) && otherStack.getCount() == this.getCount())
             return true;
         return false;
     }

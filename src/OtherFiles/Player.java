@@ -2,6 +2,7 @@ package OtherFiles;
 
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import OtherFiles.ItemClasses.ItemStack;
 
@@ -15,6 +16,7 @@ public final class Player {
     private double mana; // ! might become stamina
     private double experiencePoints;
     private int gold;
+    private ArrayList<Quest> questList;
 
     // private PlayerTypeEnum playerType;
     private EnumMap<PlayerInventoryEnum, HashMap<Integer, ItemStack>> inventory = new EnumMap<>(
