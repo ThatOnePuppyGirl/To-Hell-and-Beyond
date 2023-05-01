@@ -11,6 +11,10 @@ public final class Player {
         ARMOR, BUFFS, INVSTACK, INVNOSTACK
     }
 
+    private enum PlayerTypeEnum {
+        MAGE, WARRIOR,
+    }
+
     private int level;
     private double health;
     private double mana; // ! might become stamina
