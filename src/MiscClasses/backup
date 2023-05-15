@@ -1,0 +1,199 @@
+private void LevelUp()
+	{
+		throw new NotYetImplementedException(); //TODO: implement later
+	}
+	
+	public void UpdateStats()
+	{
+		throw new NotYetImplementedException(); //TODO: implement later
+	}
+	
+	private boolean CanLevelUp()
+	{
+		int maxXP = 100 + ((this.level - 1) * 50);
+		boolean overMax = this.experience >= maxXP;
+		return (overMax);
+	}
+	
+	public String GetName()
+	{
+		return name;
+	}
+	
+	public int GetLevel()
+	{
+		return level;
+	}
+	
+	public void AddExperience(int addAmount)
+	{
+		this.experience += addAmount;
+		if (CanLevelUp())
+			LevelUp();
+	}
+	
+	public int GetMaxHealth()
+	{
+		return this.maxHealth;
+	}
+	
+	public double GetHealth()
+	{
+		return this.health;
+	}
+	
+	public void TakeDamage(double damageTaken)
+	{
+		this.health -= damageTaken;
+		if (this.health <= 0)
+			EndGame();
+	}
+	
+	public void Heal(double damageRecieved)
+	{
+		this.health += damageRecieved;
+		if (this.health > this.maxHealth)
+			this.health = this.maxHealth;
+	}
+	
+	public boolean CanCastSpell(double manaNeeded)
+	{
+		return (manaNeeded <= this.mana);
+	}
+	
+	public void UseMana(double manaConsumed)
+	{			
+		this.mana -= manaConsumed;
+	}
+	
+	public void GainMana(double manaAdded)
+	{
+		this.mana += manaAdded;
+		if (this.mana > this.maxMana)
+			this.mana = this.maxMana;
+	}
+	
+	public PlayerType GetPlayerType()
+	{
+		return this.playerType;
+	}
+	
+	public ArrayList<Item> RequestInventory()
+	{
+		return this.inventory;
+	}
+	
+	public void AddItemToInv(Item item)
+	{
+		this.inventory.add(item);
+	}
+	
+	public void RemoveItemFromInv(Item item)
+	{
+		if (!(this.inventory.contains(item)))
+			throw new IllegalArgumentException();
+		
+		this.inventory.remove(item);
+		this.inventory.trimToSize();
+	}
+	
+	public void UseItem(Consumable item)
+	{
+		
+		String effectString = item.UseItem();
+		String[] effectStats = effectString.split(" ");
+		SetCurrentEffectDetails(
+				EffectType.valueOf(effectStats[0].toUpperCase()),
+				Integer.parseInt(effectStats[1]), 
+				Integer.parseInt(effectStats[2])
+				);
+		
+		if (item.GetUses() <= 0)
+		{
+			this.inventory.remove(item);
+			this.inventory.trimToSize();
+		}
+	}
+	
+	public Item[] GetArmor()
+	{
+		return this.armor;
+	}
+	
+	public void EquipArmor(Armor armorPiece)
+	{
+		int arrayIndex;
+		switch (armorPiece.GetArmorType().name().toLowerCase())
+		{
+		case "head":
+			arrayIndex = 0;
+			break;
+		case "torso":
+			arrayIndex = 1;
+			break;
+		case "legs":
+			arrayIndex = 2;
+			break;
+		case "feet":
+			arrayIndex = 3;
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
+		
+		Item item = this.armor[arrayIndex];
+		
+		if (!(item.getClass() == NoItem.class))
+		{
+			AddItemToInv(item);
+		}
+		
+		this.armor[arrayIndex] = armorPiece;
+	}
+	
+	public void UnequipArmor(int index)
+	{
+		Item item = this.armor[index];
+		if (item.getClass() == NoItem.class)
+			throw new IllegalArgumentException();
+		
+		AddItemToInv(item);
+		
+		this.armor[index] = new NoItem();
+	}
+	
+	public Item GetEquippedItem()
+	{
+		return this.equippedItem;
+	}
+	
+	public void EquipItem(Item item)
+	{
+		if (item.getClass() == NoItem.class || !(this.inventory.contains(item)))
+			throw new IllegalArgumentException();
+		
+		this.equippedItem = item;
+	}
+	
+	public void UnequipItem()
+	{
+		this.equippedItem = new NoItem();
+	}
+	
+	public String GetCurrentEffectDetails()
+	{
+		String effectString = currentEffect.toString() + " " + String.valueOf(remainingEffectDuration) + " " + String.valueOf(effectStrength);
+		return effectString;
+	}
+
+	public void SetCurrentEffectDetails(EffectType currentEffect, int duration, int strength)
+	{
+		this.currentEffect = currentEffect;
+		this.remainingEffectDuration = duration;
+		this.effectStrength = strength;
+	}
+	
+	private void EndGame()
+	{
+		throw new NotYetImplementedException(); // TODO: implement
+	}
