@@ -1,6 +1,7 @@
 package MainGameFiles;
 
 import AbstractClasses.ItemStack;
+import AbstractClasses.Quest;
 
 import java.util.EnumMap;
 import java.util.HashMap;
