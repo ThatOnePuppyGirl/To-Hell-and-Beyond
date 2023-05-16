@@ -1,11 +1,11 @@
 package MainGameFiles;
 
-import AbstractClasses.ItemStack;
-import AbstractClasses.Quest;
-
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.ArrayList;
+
+import AbstractClasses.ItemStack;
+import AbstractClasses.Quest;
 
 public final class Player {
     private enum PlayerInventoryEnum {

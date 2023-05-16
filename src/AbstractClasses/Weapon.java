@@ -1,7 +1,5 @@
 package AbstractClasses;
 
-import java.util.Random;
-
 import MiscClasses.PlayerType;
 
 public abstract class Weapon extends Item {

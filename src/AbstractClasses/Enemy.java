@@ -1,7 +1,5 @@
 package AbstractClasses;
 
-import java.util.Random;
-
 public abstract class Enemy {
 	protected String name; // the name of the enemy
 	protected int index; // the index of the enemy (during fights)

@@ -1,7 +1,5 @@
 package AbstractClasses;
 
-import java.util.Random;
-
 import MainGameFiles.Player;
 
 public abstract class Bubble {

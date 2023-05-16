@@ -1,7 +1,5 @@
 package AbstractClasses;
 
-import java.util.Random;
-
 public abstract class Armor extends Item {
 
 	protected float pctDmgBlocked; // initial percent of damage blocked
