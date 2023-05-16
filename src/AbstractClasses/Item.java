@@ -1,7 +1,6 @@
 package AbstractClasses;
 
 public abstract class Item {
-
 	protected String name; // the name of the item
 	protected String description; // a description of the item
 	protected int levelNeeded; // the level needed to use the item (must be positive)

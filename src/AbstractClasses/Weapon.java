@@ -11,7 +11,6 @@ public abstract class Weapon extends Item {
 	protected float lSTModifier; // TODO: should I actually have this? or is this just too OP
 	protected float critChance; // chance for crit (between 0.0f and 1.0f)
 	protected float critMultiplier; // how much to multiply the damage by for a crit
-	protected Random rng; // random number generator
 	protected PlayerType playerType; // the PlayerType that can use this weapon
 
 	/*
@@ -24,19 +23,8 @@ public abstract class Weapon extends Item {
 	 * Generates a random amount of damage (including crits)
 	 */
 	public int GenerateRandomDamage(int level) {
-		float totalLevelStatMultiplier = (this.levelStatMultiplier + this.lSTModifier) * level; // generates the total
-																								// level stat multiplier
-		int adjustedMax = (int) (this.maxDamage * totalLevelStatMultiplier); // adjusts the max
-		int adjustedMin = (int) (this.minDamage * totalLevelStatMultiplier); // adjusts the min
-		int baseRandomDamage = rng.nextInt(adjustedMax - adjustedMin + 1); // base for random
-		int adjustedRandomDamage = baseRandomDamage + adjustedMin;
-		// SEE Bubble.java for thorough explanation
-		float critRNG = rng.nextFloat(); // creates random float
-		boolean crit = (critRNG <= this.critChance); // checks if the float is less than or equal to the crit chance
-														// if it is, then we hit a crit! set to true
-		return (crit ? (int) (adjustedRandomDamage * critMultiplier) : adjustedRandomDamage); // returns the total
-																								// damage (adjust for
-																								// crit)
+		return 0;
+		// TODO: generate
 	}
 
 	public PlayerType GetPlayerType() {

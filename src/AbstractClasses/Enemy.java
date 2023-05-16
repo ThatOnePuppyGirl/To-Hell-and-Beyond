@@ -15,7 +15,6 @@ public abstract class Enemy {
 	protected int experienceGained; // the amount of experience the player gains for defeating the enemy
 	protected int avgDamage; // the average amount of damage the enemy deals
 	protected int dmgVar; // the amount of variation from the average
-	protected Random rng; // rng :)
 
 	/*
 	 * DealDamage()
@@ -26,13 +25,8 @@ public abstract class Enemy {
 	 * Generates a random amount of damage and returns it.
 	 */
 	public int DealDamage() {
-		int maxRNG = (dmgVar * 2) + 1; // multiplies dmgVar by 2 then adds 1 because of random generation (allows for
-										// negative numbers)
-		int dmgVar2 = rng.nextInt(maxRNG) - dmgVar; // generates random number then adjusts down (to allow for negative
-													// numbers)
-		int totalDmg = avgDamage + dmgVar2; // adds dmgVar2 to avgDamage to generate damage
-
-		return totalDmg; // returns totalDmg
+		// TODO: generate
+		return 0;
 	}
 
 	// constructors: Name(String name, int index, double health, int level, Item

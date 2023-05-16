@@ -26,29 +26,9 @@ public abstract class Bubble {
 	 * minDamagePerTurn and maxDamagePerTurn;
 	 */
 	public int GenerateRandomDamage() {
-		int damageAdj = this.damageVariation * this.levelCast; // calculates total damage variation
-		int adjMin = this.minDamagePerTurn + damageAdj; // creates a new adjusted minDamage by adding damageAdj
-		int adjMax = this.maxDamagePerTurn + damageAdj; // creates a new adjusted maxDamage by adding damageAdj
-		int max4RNG = adjMax - adjMin + 1; // creates the upper limit for generating numbers
-											// by subtracting the min from the max, it creates a range
-											// between 0 and max4RNG where any number in that range
-											// can be made to be in the range of adjMin and adjMax by
-											// adding adjMin. We add 1 to include adjMax since nextInt(upperBound)
-											// is exclusive to the upperBound.
-
-		Random rng = new Random(); // initializing rng
-		int dmg = rng.nextInt(max4RNG) + adjMin; // generates a random number then adjusts it to be within the range of
-													// adjMin and adjMax by adding adjMin to the random number.
-
-		return dmg; // returns the damage done
+		return 0;
+		// TODO: generate
 	}
-
-	/*
-	 * An abstract SetDetails() method.
-	 * Must be overridden!
-	 * Sets the details of the object
-	 */
-	protected abstract void SetDetails();
 
 	/*
 	 * DamageBubble(int damage)
