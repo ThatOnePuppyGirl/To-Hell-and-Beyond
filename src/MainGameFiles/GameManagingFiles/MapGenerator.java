@@ -192,7 +192,7 @@ public final class MapGenerator {
 			this.isCollapsed = this.IsCollapsed();
 		}
 
-		GetRidOfDeadEnds();
+		OnlyLongestPath();
 
 		// for visualization for now
 		String[][] pretty = Prettify(this.map);
@@ -217,7 +217,7 @@ public final class MapGenerator {
 		frame.setVisible(true);
 	}
 
-	private void GetRidOfDeadEnds() {
+	private void OnlyLongestPath() {
 		int[][] biggest = FindLongestConnections();
 		int max = 0;
 		for (int i = 0; i < biggest.length; i++)
@@ -250,7 +250,6 @@ public final class MapGenerator {
 		while (!(queue.isEmpty())) {
 			Coords coords = queue.remove(0);
 			setInCluster.add(coords);
-			System.out.println(count);
 			int[] neighbors = GetNeighborDirections(coords);
 			y = coords.y;
 			x = coords.x;

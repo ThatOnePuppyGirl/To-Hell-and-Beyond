@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Main",
             "request": "launch",
+            "mainClass": "MainGameFiles.GameManagingFiles.Main",
+            "projectName": "To Hell and Beyond_cafc4864"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
             "mainClass": "GameManagingFiles.Main",
             "projectName": "To Hell and Beyond_cafc4864"
         },

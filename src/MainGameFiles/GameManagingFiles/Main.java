@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello World!");
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             System.out.println(i);
             MapGenerator map = new MapGenerator(10, 10);
         }
