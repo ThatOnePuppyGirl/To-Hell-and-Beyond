@@ -18,7 +18,7 @@ public final class MapGenerator {
 		public final boolean isBottom; // isBottom
 		public final boolean isLeft; // isLeft
 
-		public Coords(int x, int y) {
+		public Coords(int x, int y) { // coords object instantiator
 			this.x = x;
 			this.y = y;
 			this.isTop = (y <= 0);
@@ -73,6 +73,10 @@ public final class MapGenerator {
 			Arrays.asList(8, 9, 10, 11, 12, 13, 14, 15));
 
 	/**
+	 * Allows for easy merging in setting algorithm. O(a) time, where a is the
+	 * length of
+	 * the input array named a.
+	 * 
 	 * @param a
 	 * @param b
 	 * @return ArrayList<Integer>
@@ -86,6 +90,8 @@ public final class MapGenerator {
 	}
 
 	/**
+	 * Allows for even easier intersections, using earlier Intersection() method.
+	 * 
 	 * @param a
 	 * @param direction
 	 * @param canConnect
