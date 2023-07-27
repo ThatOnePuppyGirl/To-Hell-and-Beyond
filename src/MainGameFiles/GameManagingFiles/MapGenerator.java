@@ -326,14 +326,14 @@ public final class MapGenerator {
 			for (int x = 0; x < connections[0].length; x++) {
 				int index = map[y][x];
 				String total = "";
-				if ((index & 1) != 0)
-					total += "^";
-				if ((index & 2) != 0)
-					total += ">";
-				if ((index & 4) != 0)
-					total += "V";
 				if ((index & 8) != 0)
 					total += "<";
+				if ((index & 1) != 0)
+					total += "^";
+				if ((index & 4) != 0)
+					total += "V";
+				if ((index & 2) != 0)
+					total += ">";
 				connections[y][x] = total;
 			}
 		}
